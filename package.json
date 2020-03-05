@@ -11,7 +11,7 @@
     "start": "yarn run config-all",
     "poststart": "run-p server client"
   },
-  "proxy": "http://localhost:6000",
+  "proxy": "http://localhost:5000",
   "dependencies": {
     "@material-ui/core": "^4.9.5",
     "@material-ui/icons": "^4.9.1",

@@ -1,9 +1,13 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import { Alert, AlertTitle } from '@material-ui/lab';
 import Container from '@material-ui/core/Container';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
-import { Alert, AlertTitle } from '@material-ui/lab';
+
+// Forms
+import FormApiGet from 'components/Form/FormApiGet';
+import FormApiPost from 'components/Form/FormApiPost';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -20,16 +24,21 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: theme.spacing(1),
     textAlign: 'left',
     color: theme.palette.text.secondary,
-    height: 200,
   },
 }));
 
 const ContainerFluid = ({ ...props }) => {
   const classes = useStyles();
+  const apiRoute = {
+    get: {
+      test: '/api/get/test',
+      set_cookie_test: '/api/get/set-cookie-test',
+    },
+  };
+
   return (
     <Container maxWidth="lg" className={'pl0 pr0'}>
       <div className={classes.root}>
-
         {/* Columns */}
         <Grid container spacing={3} className={classes.gridContainer + ' bg-white'}>
           <Grid item xs={12} sm={6}>
@@ -43,27 +52,29 @@ const ContainerFluid = ({ ...props }) => {
         {/* Data test from API */}
         <Grid container spacing={3} className={classes.gridContainer}>
           <Grid item xs={12} className={'pb0'}>
-            <h3 className={'mb0 mt0 tal'}>Fetch data from API</h3>
+            <h3 className={'mb0 mt0 tal'}>GET from API Route</h3>
           </Grid>
           <Grid item xs={12} sm={6}>
             <Paper className={classes.paper}>
-              <h5 className={'mt0'}>Test 1</h5>
-  
-            </Paper>
-            <Paper className={classes.paper}>
-              <h5 className="mt0">Test 2</h5>
+              <FormApiGet
+                {...{
+                  title: 'Get: Test: /api/get/test',
+                  apiRoute: '/api/get/test',
+                }}
+              />
             </Paper>
           </Grid>
           <Grid item xs={12} sm={6}>
             <Paper className={classes.paper}>
-              <h5 className="mt0">Test 3</h5>
-            </Paper>
-            <Paper className={classes.paper}>
-              <h5 className="mt0">Test 4</h5>
+              <FormApiGet
+                {...{
+                  title: 'Get: Set Cookie Test: /api/get/set-cookie-test',
+                  apiRoute: '/api/get/set-cookie-test',
+                }}
+              />
             </Paper>
           </Grid>
         </Grid>
-      
       </div>
     </Container>
   );

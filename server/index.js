@@ -1,8 +1,8 @@
 require('dotenv').config();
 require('./_helpers/_globals');
 
+const chalk = require('chalk');
 const config = require('config');
-const log = require('ololog');
 const Koa = require('koa');
 const logger = require('koa-pino-logger');
 const cors = require('kcors');
@@ -40,4 +40,4 @@ app.use(logger());
 app.use(bodyParser());
 app.use(router());
 
-app.listen(PORT_SERVER, () => log.blue(`Server listening on port ${PORT_SERVER}`));
+app.listen(PORT_SERVER, () => console.log(chalk.blue(`Server listening on port ${PORT_SERVER}`)));

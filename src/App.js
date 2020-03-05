@@ -1,9 +1,7 @@
 import React from 'react';
 import './App.scss';
 import './assets/css/edge.css';
-import BtnHookStyled from 'components/Hook/BtnHookStyled';
 import ContainerFluid from 'components/Container/ContainerFluid';
-import FormApi from 'components/Form/FormApi';
 
 function App() {
   return (
@@ -11,7 +9,6 @@ function App() {
       <header className="App-header">
         <h2>Nginx React Koa - Docker Containers</h2>
       </header>
-      <FormApi />
       <ContainerFluid />
     </div>
   );

@@ -1,0 +1,78 @@
+# Base image
+FROM node:10.16.3-alpine
+
+LABEL maintainer="flavio.espinoza@gmail.com"
+
+# Copy required files
+COPY ./scripts/ /dev/example/scripts/
+COPY ./config/ /dev/example/config/
+COPY ./public/ /dev/example/public/
+COPY ./server/ /dev/example/server/
+COPY ./src/ /dev/example/src/
+COPY ./package.json /dev/example
+COPY ./yarn.lock /dev/example
+
+WORKDIR /dev/example
+
+# Node ENV production
+ENV NODE_ENV=production
+ENV NODE_TLS_REJECT_UNAUTHORIZED=0
+
+# Server URI
+ENV PORT_SERVER=pass-on-command-line
+
+# React Client URI
+ENV NODE_PATH=./src
+ENV PORT=pass-on-command-line
+
+# For debugging
+RUN apk add nano
+RUN apk add curl
+
+# Install deps
+RUN cd /dev/example && yarn install
+
+# Rebuild linux node-sass binary from Node Alpine base image
+RUN cd /dev/example && npm rebuild node-sass
+RUN npm install -g nodemon
+# Create optimized build
+RUN cd /dev/example && yarn run build
+
+# Use this as change can understand what version running
+ENV APP_VERSION=0.1.0
+
+# See https://create-react-app.dev/docs/proxying-api-requests-in-development#invalid-host-header-errors-after-configuring-proxy
+# Note we are doing in NGINX that fronts this
+ENV DANGEROUSLY_DISABLE_HOST_CHECK=true
+
+# Set the environment variables needed by the server to access Sengrid Email Service
+ENV EMAIL_SECRET=pass-on-command-line
+
+# ----------------------------------------------------------------------
+# Sessions
+# ----------------------------------------------------------------------
+# Session keys used to secure seesion
+ENV APP_SECRET_1=pass-on-command-line
+ENV APP_SECRET_2=pass-on-command-line
+
+# ----------------------------------------------------------------------
+# OpenID Provider
+# ----------------------------------------------------------------------
+ENV OKTA_CLIENT_ID=pass-on-command-line
+ENV OKTA_CLIENT_SECRET=pass-on-command-line
+ENV OKTA_API_KEY=pass-on-command-line
+
+# ----------------------------------------------------------------------
+# Ports
+# ----------------------------------------------------------------------
+# React Client
+EXPOSE 8080
+
+# Node Server
+EXPOSE 5000
+
+# ----------------------------------------------------------------------
+# Start
+# ----------------------------------------------------------------------
+
+CMD ["yarn", "start"]

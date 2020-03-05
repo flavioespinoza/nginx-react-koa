@@ -78,7 +78,7 @@ const _configEnv = async (configPath) => {
       let _config_file_path = _docker.config;
       await _configEnv(_config_file_path);
     } else {
-      await _configEnv('./va_demo_config.yml');
+      await _configEnv('./nrk_config.yml');
     }
   } catch (err) {
     _error({
