@@ -1,0 +1,15 @@
+{
+  "node_env": "development",
+  "app_secret_1": "a9025654-7339-4e02-8b96-f43a5d6be4c0",
+  "app_secret_2": "0d663554-42c6-439e-b2a6-ad86c98c5cef",
+  "client": {
+    "port": "4040",
+    "protocol": "http",
+    "origin": "http://localhost:4040"
+  },
+  "server": {
+    "port": "6000",
+    "protocol": "http",
+    "origin": "http://localhost:6000"
+  }
+}

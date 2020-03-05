@@ -1,0 +1,17 @@
+va_demo:
+  # Environment
+  node_env: development
+  app_secret_1: ${process.env.APP_SECRET_1}
+  app_secret_2: ${process.env.APP_SECRET_2}
+  
+  # React client
+  client:
+    port: ${process.env.PORT}
+    protocol: http
+    origin: http://localhost:${process.env.PORT}
+
+  # Node-Koa server
+  server:
+    port: ${process.env.PORT_SERVER}
+    protocol: http
+    origin: http://localhost:${process.env.PORT_SERVER}
